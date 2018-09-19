@@ -32,9 +32,10 @@ var result = `/*
         /* 我来介绍一下我自己 */
         /* 我需要一张白纸 */
         #code{
-            width:50%;
+            width:40%;
             position:fixed;
             left:0;
+            transform: rotate(-3deg) translate(40px,10px);
         }
         `
 var result2 = `

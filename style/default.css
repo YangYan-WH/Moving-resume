@@ -1,22 +1,32 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Bahnschrift','heiti'
+    font-family: 'Bahnschrift', 'heiti'
 }
-.token.selector{
+
+.token.selector {
     color: black;
 }
-.token.property{
+
+.token.property {
     color: black;
 }
-.token.function{
-    color:black; 
+
+.token.function {
+    color: black;
 }
-#code{
+
+#code {
     height: 100vh;
-    overflow: hidden;
+    overflow: auto;
 }
-body{
+
+::-webkit-scrollbar {
+    /*隐藏滚轮*/
+    display: none;
+}
+
+body {
     position: relative;
 }
