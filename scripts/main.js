@@ -1,5 +1,3 @@
-//var html = Prism.highlight(text, Prism.languages.css, 'css');
-
 var result = `/*
         *大家好,我是杨言
         *我将以动画的形式介绍我自己
@@ -33,42 +31,76 @@ var result = `/*
         }
         /* 我来介绍一下我自己 */
         /* 我需要一张白纸 */
-    `
- 
-var n = 0;
-var id = setInterval(function () {
-    n += 1
-    code.innerHTML = result.substring(0, n)
-    code.innerHTML = Prism.highlight(code.innerHTML, Prism.languages.css, 'css')
-    styleTag.innerHTML = result.substring(0, n)
-    if (n >= result.length) {
-        window.clearInterval(id)
-        fn2()
-        fn3(result)
-    }
-}, 10)
-
-function fn2(){
-    var paper = document.createElement('div')
-    paper.id = 'paper'
-    document.body.appendChild(paper)
-}
-function fn3(preResult){
-    var result3 = `
-        #paper{
-            width:100px;
-            height:100px;
-            background:red;
+        #code{
+            width:50%;
+            position:fixed;
+            left:0;
         }
-    `
+        `
+var result2 = `
+        #paper{
+            width:50%;
+            height:100vh;
+            position:fixed;
+            right:0;
+            background:white;
+            border:1px solid green;
+        }
+        pre.content{
+            padding-left:16px;
+        }`
+var md = `
+# 自我介绍
+
+我叫杨言
+1990年7月出生
+自学前端
+`
+function writeCode(prefix, code, fn) {
+    var domCode = document.querySelector('#code')
+    domCode.innerHTML = prefix || ''
     var n = 0;
     var id = setInterval(function () {
         n += 1
-        code.innerHTML = preResult + result3.substring(0, n)
-        code.innerHTML = Prism.highlight(code.innerHTML, Prism.languages.css, 'css')
-        styleTag.innerHTML = preResult + result3.substring(0, n)
-        if (n >= result.length) { 
+        domCode.innerHTML = Prism.highlight(prefix + code.substring(0, n), Prism.languages.css, 'css')
+        styleTag.innerHTML = prefix + code.substring(0, n)
+        domCode.scrollTop = domCode.scrollHeight
+        if (n >= code.length) {
             window.clearInterval(id)
+            // fn.call()
+            fn && fn.call()
         }
-    },20)    
+    }, 10)
+}
+
+function writeMarkdown(markdown, fn) {
+    var domPaper = document.querySelector('#paper>.content')
+    var n = 0
+
+    var id = setInterval(function () {
+        n += 1
+        domPaper.innerHTML = markdown.substring(0, n)//Prism.highlight(markdown + markdown.substring(0, n), Prism.languages.markdown, 'markdown')
+        domPaper.scrollTop = domPaper.scrollHeight
+        if (n >= markdown.length) {
+            window.clearInterval(id)
+            fn && fn.call()
+        }
+    }, 10)
+}
+writeCode('', result, function () { //writeCode call the function
+    createPaper(function() {
+        writeCode(result, result2,function(){
+            writeMarkdown(md)
+        })
+    })
+})
+
+function createPaper(fn) {
+    var paper = document.createElement('div')
+    paper.id = 'paper'
+    var content = document.createElement('pre')
+    content.className = 'content'
+    paper.appendChild(content)
+    document.body.appendChild(paper)
+    fn && fn.call()
 }
