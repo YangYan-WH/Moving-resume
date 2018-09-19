@@ -12,7 +12,7 @@ var result = `/*
             font-size:16px;
         }
         #code{
-            border:1px solid red;
+            border:1px solid grey;
             padding:16px;
         }
         /*我将对代码进行高亮*/
@@ -39,22 +39,25 @@ var result = `/*
         `
 var result2 = `
         #paper{
-            width:50%;
-            height:100vh;
             position:fixed;
             right:0;
+            width:50%;
+            height:100vh;
             background:white;
-            border:1px solid green;
+            border:1px solid black;
         }
         pre.content{
             padding-left:16px;
+            font-weight:600;
         }`
 var md = `
 # 自我介绍
 
-我叫杨言
-1990年7月出生
-自学前端
+我叫杨言  
+
+1990年7月出生  
+
+自学前端  
 `
 function writeCode(prefix, code, fn) {
     var domCode = document.querySelector('#code')
