@@ -46,6 +46,7 @@ var result2 = `
             height:100vh;
             background:white;
             border:1px solid black;
+            transform: rotate(3deg) translate(-40px,10px);
         }
         pre.content{
             padding-left:16px;
@@ -55,10 +56,8 @@ var md = `
 # 自我介绍
 
 我叫杨言  
-
-1990年7月出生  
-
-自学前端  
+  
+目前正在自学前端  
 `
 function writeCode(prefix, code, fn) {
     var domCode = document.querySelector('#code')
